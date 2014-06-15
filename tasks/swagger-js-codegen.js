@@ -10,7 +10,7 @@ module.exports = function (grunt) {
             var swagger = JSON.parse(fs.readFileSync(api.swagger));
             var gen = new CodeGen(api.className, swagger);
             var source = gen.getCode();
-            fs.writeFileSync(dest + '/' + api.filename, source, 'UTF-8');
+            fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
         });
     });
 };
