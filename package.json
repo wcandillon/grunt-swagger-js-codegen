@@ -32,6 +32,7 @@
   ],
   "homepage": "https://github.com/wcandillon/grunt-swagger-js-codegen",
   "dependencies": {
+    "swagger-js-codegen": "0.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
