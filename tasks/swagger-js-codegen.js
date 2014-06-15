@@ -3,7 +3,7 @@ module.exports = function (grunt) {
 
     grunt.registerMultiTask('swagger-js-codegen', 'Swagger codegen for Javascript', function(){
         var fs = require('fs');
-        var CodeGen = require('wagger-js-codegen').CodeGen;
+        var CodeGen = require('swagger-js-codegen').CodeGen;
         var options = this.options();
         var dest = options.dest;
         options.apis.forEach(function(api){
