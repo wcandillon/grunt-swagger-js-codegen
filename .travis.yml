@@ -8,8 +8,8 @@ deploy:
   provider: npm
   email: w@28.io
   api_key:
-    secure: g+DjrtGRz4W7bvcCrJT3Oa80SFF/9TL+zP0rmTq36ANHNz0EyPV8epanL26RmQj+QA5XnHqzK1kFjFURrVncLJZdHXIdOSalaB5k8yRgpLEMETQvmTUfe6rWNTaEndKTjrUyWhHqceK4QlSrcv3VIq8loObimqaH7J1K3fZ7XgQ=
+    secure: Awy+nueiNfDEU4wqUeH+4CQjnPC2d9yt53JOqPdf5yhb0ljuLDOa/k1pTM2C9dsmw11bVeQra5McHLrG9Aj5vl2+pDqFuxD6kBaF/CcLJBe3OztwwtrrM9Twgc/tXGozIs9zkXrEabHl0n26mMqGwozO2C4Uwj2h1S1+U2E6EzM=
   on:
+    repo: wcandillon/grunt-swagger-js-codegen
     branch: master
-    repo: wcandillon/swagger-js-codegen
-    node: 0.11
+    node: '0.11'
