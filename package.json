@@ -1,6 +1,6 @@
 {
   "name": "grunt-swagger-js-codegen",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Grunt task for Swagger JS codegen",
   "main": "./tasks/swagger-js-codegen.js",
   "scripts": {
@@ -32,7 +32,7 @@
   ],
   "homepage": "https://github.com/wcandillon/grunt-swagger-js-codegen",
   "dependencies": {
-    "swagger-js-codegen": "0.0.6"
+    "swagger-js-codegen": "0.0.7"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
