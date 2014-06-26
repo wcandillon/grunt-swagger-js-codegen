@@ -8,8 +8,7 @@ module.exports = function (grunt) {
         var dest = options.dest;
         options.apis.forEach(function(api){
             var swagger = JSON.parse(fs.readFileSync(api.swagger));
-            var gen = new CodeGen(api.className, swagger);
-            var source = gen.getCode();
+            var source = api.angularjs === true ? CodeGen.getNodeCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
             fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
         });
     });
