@@ -6,6 +6,7 @@ module.exports = function (grunt) {
         var CodeGen = require('swagger-js-codegen').CodeGen;
         var options = this.options();
         var dest = options.dest;
+        grunt.file.mkdir(dest);
         options.apis.forEach(function(api){
             var swagger = JSON.parse(fs.readFileSync(api.swagger));
             var source = api.angularjs === true ? CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
