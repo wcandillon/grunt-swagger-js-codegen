@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                     }
                 });
             } else {
-                fs.readFileSync(api.swagger, 'UTF-8', function(err, data){
+                fs.readFile(api.swagger, 'UTF-8', function(err, data){
                     if(err) {
                         deferred.reject(err);
                     } else {
