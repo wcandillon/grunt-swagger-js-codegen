@@ -1,6 +1,6 @@
 {
   "name": "grunt-swagger-js-codegen",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Grunt task for Swagger JS codegen",
   "main": "./tasks/swagger-js-codegen.js",
   "scripts": {
