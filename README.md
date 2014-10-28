@@ -12,8 +12,7 @@
                 apis: [
                     {
                         swagger: 'swagger/_queries',
-                        fileName: 'queries.api.28.io.js',
-                        className: 'Queries'
+                        moduleName: 'Model' // This is the model and file name
                 dest: 'lib'
             },
             dist: {
@@ -31,9 +30,7 @@
                 apis: [
                     {
                         swagger: 'swagger/_queries',
-                        fileName: 'queries.api.28.io.js',
-                        className: 'Queries',
-                        moduleName: 'queries.api.28.io.js',
+                        moduleName: 'Model' // This is the model and file name
                         angularjs: true
                 dest: 'lib'
             },
