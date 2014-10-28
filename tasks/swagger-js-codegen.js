@@ -25,7 +25,7 @@ module.exports = function (grunt) {
                         deferred.reject('Error while fetching ' + api.swagger + ': ' + (error || body));
                     } else {
                         var swagger = JSON.parse(body);
-                        var source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                        var source = api.angularjs === true ? CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         grunt.log.writeln('Generated ' + api.moduleName + '.js from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + api.moduleName + '.js', source, 'UTF-8');
                         deferred.resolve();
