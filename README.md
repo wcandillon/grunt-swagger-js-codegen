@@ -13,12 +13,14 @@
                     {
                         swagger: 'swagger/_queries',
                         moduleName: 'Model' // This is the model and file name
+                    }
+                ],
                 dest: 'lib'
             },
             dist: {
-
             }
-        },
+        }
+    });
 ```
 
 ###Angularjs generation
@@ -30,13 +32,15 @@
                 apis: [
                     {
                         swagger: 'swagger/_queries',
-                        moduleName: 'Model' // This is the model and file name
+                        moduleName: 'Model', // This is the model and file name
                         angularjs: true
+                    }
+                ],
                 dest: 'lib'
             },
             dist: {
-
             }
-        },
+        }
+    });
 ```
 
