@@ -8,17 +8,21 @@
 ```javascript
     grunt.initConfig({
         'swagger-js-codegen': {
-            options: {
-                apis: [
-                    {
-                        swagger: 'swagger/_queries',
-                        moduleName: 'Model' // This is the model and file name
-                dest: 'lib'
-            },
-            dist: {
-
+            queries: {
+                options: {
+                    apis: [
+                        {
+                            swagger: 'swagger/_queries',
+                            moduleName: 'Model' // This is the model and file name
+                        }
+                    ],
+                    dest: 'lib'
+                },
+                dist: {
+                }
             }
-        },
+        }
+    });
 ```
 
 ###Angularjs generation
@@ -26,17 +30,21 @@
 ```javascript
     grunt.initConfig({
         'swagger-js-codegen': {
-            options: {
-                apis: [
-                    {
-                        swagger: 'swagger/_queries',
-                        moduleName: 'Model' // This is the model and file name
-                        angularjs: true
-                dest: 'lib'
-            },
-            dist: {
-
+            queries: {
+                options: {
+                    apis: [
+                        {
+                            swagger: 'swagger/_queries',
+                            moduleName: 'Model', // This is the model and file name
+                            angularjs: true
+                        }
+                    ],
+                    dest: 'lib'
+                },
+                dist: {
+                }
             }
-        },
+        }
+    });
 ```
 
