@@ -26,8 +26,8 @@ module.exports = function (grunt) {
                     } else {
                         var swagger = JSON.parse(body);
                         var source = api.angularjs === true ? CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        grunt.log.writeln('Generated ' + api.className + '.js from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + api.className + '.js', source, 'UTF-8');
+                        grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
+                        fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
                         deferred.resolve();
                     }
                 });
@@ -38,8 +38,8 @@ module.exports = function (grunt) {
                     } else {
                         var swagger = JSON.parse(data);
                         var source = api.angularjs === true ? CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        grunt.log.writeln('Generated ' + api.className + '.js from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + api.className + '.js', source, 'UTF-8');
+                        grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
+                        fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
                         deferred.resolve();
                     }
                 });
