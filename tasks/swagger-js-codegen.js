@@ -24,13 +24,15 @@ module.exports = function (grunt) {
                     if(error || response.statusCode !== 200) {
                         deferred.reject('Error while fetching ' + api.swagger + ': ' + (error || body));
                     } else {
-                        var swagger = JSON.parse(body);
+                        var swagger = JSON.parse(body),
+                            source = null;
+
                         if (api.type === 'angular') {
-                            var source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
                         } else if (api.type === 'node') {
-                            var source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         } else {
-                            var source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
                         }
                         grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
@@ -42,13 +44,15 @@ module.exports = function (grunt) {
                     if(err) {
                         deferred.reject(err);
                     } else {
-                        var swagger = JSON.parse(data);
+                        var swagger = JSON.parse(data),
+                            source = null;
+
                         if (api.type === 'angular') {
-                            var source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
                         } else if (api.type === 'node') {
-                            var source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         } else {
-                            var source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
                         }
                         grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
