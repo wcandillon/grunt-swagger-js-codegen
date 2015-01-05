@@ -27,12 +27,12 @@ module.exports = function (grunt) {
                         var swagger = JSON.parse(body),
                             source = null;
 
-                        if (api.type === 'angular') {
+                        if (api.angularjs === true) {
                             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
-                        } else if (api.type === 'node') {
-                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        } else {
+                        } else if (api.custom === true) {
                             source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                        } else {
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         }
                         grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
@@ -47,12 +47,12 @@ module.exports = function (grunt) {
                         var swagger = JSON.parse(data),
                             source = null;
 
-                        if (api.type === 'angular') {
+                        if (api.angularjs === true) {
                             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
-                        } else if (api.type === 'node') {
-                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        } else {
+                        } else if (api.custom === true) {
                             source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                        } else {
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         }
                         grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
