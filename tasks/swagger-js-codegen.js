@@ -27,7 +27,7 @@ module.exports = function (grunt) {
                         var swagger = JSON.parse(body),
                             source = null;
 
-                        if (api.angularjs === true) {
+                        if (api.type === 'angular' || api.angularjs === true) {
                             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
                         } else if (api.custom === true) {
                             source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
                         var swagger = JSON.parse(data),
                             source = null;
 
-                        if (api.angularjs === true) {
+                        if (api.type === 'angular' || api.angularjs === true) {
                             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
                         } else if (api.custom === true) {
                             source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
