@@ -16,6 +16,7 @@ module.exports = function (grunt) {
         grunt.file.mkdir(dest);
         options.apis.forEach(function(api){
             var deferred = Q.defer();
+            var fname = api.fileName || api.moduleName || api.className;
             if(api.swagger.substring(0, 'http://'.length) === 'http://' || api.swagger.substring(0, 'https://'.length) === 'https://') {
                 request({
                     uri: api.swagger,
@@ -34,8 +35,8 @@ module.exports = function (grunt) {
                         } else {
                             source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         }
-                        grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
+                        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
+                        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
                         deferred.resolve();
                     }
                 });
@@ -54,8 +55,8 @@ module.exports = function (grunt) {
                         } else {
                             source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         }
-                        grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
+                        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
+                        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
                         deferred.resolve();
                     }
                 });
