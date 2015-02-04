@@ -16,7 +16,7 @@ module.exports = function (grunt) {
         grunt.file.mkdir(dest);
         options.apis.forEach(function(api){
             var deferred = Q.defer();
-            var fname = api.fileName || api.moduleName || api.className;
+            var fname = api.fileName || (api.moduleName || api.className) + '.js';
             if(api.swagger.substring(0, 'http://'.length) === 'http://' || api.swagger.substring(0, 'https://'.length) === 'https://') {
                 request({
                     uri: api.swagger,
