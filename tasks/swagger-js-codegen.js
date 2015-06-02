@@ -16,6 +16,7 @@ module.exports = function (grunt) {
         grunt.file.mkdir(dest);
         options.apis.forEach(function(api){
             var deferred = Q.defer();
+            var fname = api.fileName || (api.moduleName || api.className) + '.js';
             if(api.swagger.substring(0, 'http://'.length) === 'http://' || api.swagger.substring(0, 'https://'.length) === 'https://') {
                 request({
                     uri: api.swagger,
@@ -24,10 +25,18 @@ module.exports = function (grunt) {
                     if(error || response.statusCode !== 200) {
                         deferred.reject('Error while fetching ' + api.swagger + ': ' + (error || body));
                     } else {
-                        var swagger = JSON.parse(body);
-                        var source = api.angularjs === true ? CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
+                        var swagger = JSON.parse(body),
+                            source = null;
+
+                        if (api.type === 'angular' || api.angularjs === true) {
+                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                        } else if (api.custom === true) {
+                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                        } else {
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+                        }
+                        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
+                        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
                         deferred.resolve();
                     }
                 });
@@ -36,10 +45,18 @@ module.exports = function (grunt) {
                     if(err) {
                         deferred.reject(err);
                     } else {
-                        var swagger = JSON.parse(data);
-                        var source = api.angularjs === true ? CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger }) : CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        grunt.log.writeln('Generated ' + api.fileName + ' from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + api.fileName, source, 'UTF-8');
+                        var swagger = JSON.parse(data),
+                            source = null;
+
+                        if (api.type === 'angular' || api.angularjs === true) {
+                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                        } else if (api.custom === true) {
+                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                        } else {
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+                        }
+                        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
+                        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
                         deferred.resolve();
                     }
                 });
