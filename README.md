@@ -58,16 +58,16 @@
                         {
                             swagger: 'swagger/_queries',
                             moduleName: 'Model' // This is the file name
-							mustache: {
-								moduleName: 'Model'	// This is the model name - it should be repeated here if you want to use it in mustache templates
-								customParam: 'foo'	//some custom param used in mustache templates
-							},
-							template: {
-							  class: fs.readFileSync('custom-angular-class.mustache', 'utf-8'),
-							  method: fs.readFileSync('custom-method.mustache', 'utf-8'),
-							  request: fs.readFileSync('custom-angular-request.mustache', 'utf-8')
-							},
-							custom : true
+                            mustache: {
+                                moduleName: 'Model' // This is the model name - it should be repeated here if you want to use it in mustache templates
+                                customParam: 'foo'  //some custom param used in mustache templates
+                            },
+                            template: {
+                              class: fs.readFileSync('custom-angular-class.mustache', 'utf-8'),
+                              method: fs.readFileSync('custom-method.mustache', 'utf-8'),
+                              request: fs.readFileSync('custom-angular-request.mustache', 'utf-8')
+                            },
+                            custom : true
                         }
                     ],
                     dest: 'lib'
