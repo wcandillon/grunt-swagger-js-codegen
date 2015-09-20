@@ -29,11 +29,11 @@ module.exports = function (grunt) {
                             source = null;
 
                         if (api.type === 'angular' || api.angularjs === true) {
-                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger, lint: api.lint, beautify: api.beautify, after: api.after });
                         } else if (api.custom === true) {
-                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger, lint: api.lint, beautify: api.beautify, after: api.after });
                         } else {
-                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger, lint: api.lint, beautify: api.beautify, after: api.after });
                         }
                         grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
@@ -49,11 +49,11 @@ module.exports = function (grunt) {
                             source = null;
 
                         if (api.type === 'angular' || api.angularjs === true) {
-                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger, lint: api.lint, beautify: api.beautify, after: api.after });
                         } else if (api.custom === true) {
-                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger });
+                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger, lint: api.lint, beautify: api.beautify, after: api.after });
                         } else {
-                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger, lint: api.lint, beautify: api.beautify, after: api.after });
                         }
                         grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
                         fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
