@@ -31,7 +31,7 @@ module.exports = function (grunt) {
                         if (api.type === 'angular' || api.angularjs === true) {
                             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
                         } else if (api.custom === true) {
-                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger, mustache: api.mustache });
+                            source = CodeGen.getCustomCode({ className: api.className, template: fs.readFileSync(api.template, 'utf-8'), swagger: swagger, mustache: api.mustache });
                         } else {
                             source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         }
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
                         if (api.type === 'angular' || api.angularjs === true) {
                             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
                         } else if (api.custom === true) {
-                            source = CodeGen.getCustomCode({ className: api.className, template: api.template, swagger: swagger, mustache: api.mustache });
+                            source = CodeGen.getCustomCode({ className: api.className, template: fs.readFileSync(api.template, 'utf-8'), swagger: swagger, mustache: api.mustache });
                         } else {
                             source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
                         }
