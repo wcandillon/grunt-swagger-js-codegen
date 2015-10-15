@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                     method: fs.readFileSync(api.template.method, 'utf-8'),
                     request: fs.readFileSync(api.template.request, 'utf-8')
                 }
-            })
+            });
         } else {
             source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
         }
