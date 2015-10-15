@@ -1,9 +1,8 @@
 module.exports = function (grunt) {
     'use strict';
+    var fs = require('fs');
 
     grunt.registerMultiTask('swagger-js-codegen', 'Swagger codegen for Javascript', function(){
-        var fs = require('fs');
-        var CodeGen = require('swagger-js-codegen').CodeGen;
         var request = require('request');
         var Q = require('q');
         var _ = require('lodash');
@@ -25,18 +24,7 @@ module.exports = function (grunt) {
                     if(error || response.statusCode !== 200) {
                         deferred.reject('Error while fetching ' + api.swagger + ': ' + (error || body));
                     } else {
-                        var swagger = JSON.parse(body),
-                            source = null;
-
-                        if (api.type === 'angular' || api.angularjs === true) {
-                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
-                        } else if (api.custom === true) {
-                            source = CodeGen.getCustomCode({ className: api.className, template: fs.readFileSync(api.template, 'utf-8'), swagger: swagger, mustache: api.mustache });
-                        } else {
-                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        }
-                        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
+                        generateApi(api, body, dest, fname);
                         deferred.resolve();
                     }
                 });
@@ -45,18 +33,7 @@ module.exports = function (grunt) {
                     if(err) {
                         deferred.reject(err);
                     } else {
-                        var swagger = JSON.parse(data),
-                            source = null;
-
-                        if (api.type === 'angular' || api.angularjs === true) {
-                            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
-                        } else if (api.custom === true) {
-                            source = CodeGen.getCustomCode({ className: api.className, template: fs.readFileSync(api.template, 'utf-8'), swagger: swagger, mustache: api.mustache });
-                        } else {
-                            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
-                        }
-                        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
-                        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
+                        generateApi(api, data, dest, fname);
                         deferred.resolve();
                     }
                 });
@@ -79,4 +56,26 @@ module.exports = function (grunt) {
             grunt.fail.fatal(e);
         });
     });
+
+    function generateApi(api, data, dest, fname) {
+        var CodeGen = require('swagger-js-codegen').CodeGen;
+        var swagger = JSON.parse(data),
+          source = null;
+
+        if (api.type === 'angular' || api.angularjs === true) {
+            source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
+        } else if (api.custom === true) {
+            source = CodeGen.getCustomCode({ className: api.className, swagger: swagger, mustache: api.mustache,
+                template: {
+                    class: fs.readFileSync(api.template.class, 'utf-8'),
+                    method: fs.readFileSync(api.template.method, 'utf-8'),
+                    request: fs.readFileSync(api.template.request, 'utf-8')
+                }
+            })
+        } else {
+            source = CodeGen.getNodeCode({ className: api.className, swagger: swagger });
+        }
+        grunt.log.writeln('Generated ' + fname + ' from ' + api.swagger);
+        fs.writeFileSync(dest + '/' + fname, source, 'UTF-8');
+    }
 };
