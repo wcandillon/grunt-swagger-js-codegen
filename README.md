@@ -13,6 +13,7 @@
                     apis: [
                         {
                             swagger: 'swagger/_queries',
+                            className: 'Model',
                             moduleName: 'Model' // This is the model and file name
                         }
                     ],
@@ -35,6 +36,7 @@
                     apis: [
                         {
                             swagger: 'swagger/_queries',
+                            className: 'Model',
                             moduleName: 'Model', // This is the model and file name
                             angularjs: true
                         }
@@ -58,6 +60,7 @@
                         {
                             swagger: 'swagger/_queries.json',
                             moduleName: 'Model' // This is the file name
+                            className: 'Model',
                             mustache: {
                                 moduleName: 'Model' // This is the model name - it should be repeated here if you want to use it in mustache templates
                                 customParam: 'foo'  //some custom param used in mustache templates
