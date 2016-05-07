@@ -32,10 +32,11 @@
   ],
   "homepage": "https://github.com/wcandillon/grunt-swagger-js-codegen",
   "dependencies": {
-    "swagger-js-codegen": "1.1.8",
     "lodash": "^2.4.1",
     "q": "^1.0.1",
-    "request": "^2.45.0"
+    "request": "^2.45.0",
+    "swagger-js-codegen": "1.1.8",
+    "yamljs": "^0.2.7"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
