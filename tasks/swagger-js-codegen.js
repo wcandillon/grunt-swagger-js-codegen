@@ -71,7 +71,7 @@ module.exports = function (grunt) {
     });
 
     function testIfYamlExtension(filename) {
-        return filename.substring(filename.length - '.yaml'.length) === '.yaml' || filename.substring(filename.length - '.yml'.length) === '.yml';
+        return filename.substring(filename.length - '.yaml'.length).toLowerCase() === '.yaml' || filename.substring(filename.length - '.yml'.length).toLowerCase() === '.yml';
     }
 
     function generateApi(api, swagger, dest, fname) {
