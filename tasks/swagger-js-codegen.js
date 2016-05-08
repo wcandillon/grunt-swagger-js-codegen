@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
     'use strict';
     var fs = require('fs');
+    var yaml = require('yamljs');
 
     grunt.registerMultiTask('swagger-js-codegen', 'Swagger codegen for Javascript', function(){
         var request = require('request');
@@ -24,7 +25,18 @@ module.exports = function (grunt) {
                     if(error || response.statusCode !== 200) {
                         deferred.reject('Error while fetching ' + api.swagger + ': ' + (error || body));
                     } else {
-                        generateApi(api, body, dest, fname);
+                        var swagger = JSON.parse(body);
+                        generateApi(api, swagger, dest, fname);
+                        deferred.resolve();
+                    }
+                });
+            } else if(testIfYamlExtension(api.swagger)) {
+                fs.readFile(api.swagger, 'UTF-8', function(err, data) {
+                    if(err) {
+                        deferred.reject(err);
+                    } else {
+                        var swagger = yaml.parse(data);
+                        generateApi(api, swagger, dest, fname);
                         deferred.resolve();
                     }
                 });
@@ -33,7 +45,8 @@ module.exports = function (grunt) {
                     if(err) {
                         deferred.reject(err);
                     } else {
-                        generateApi(api, data, dest, fname);
+                        var swagger = JSON.parse(data);
+                        generateApi(api, swagger, dest, fname);
                         deferred.resolve();
                     }
                 });
@@ -57,10 +70,13 @@ module.exports = function (grunt) {
         });
     });
 
-    function generateApi(api, data, dest, fname) {
+    function testIfYamlExtension(filename) {
+        return filename.substring(filename.length - '.yaml'.length).toLowerCase() === '.yaml' || filename.substring(filename.length - '.yml'.length).toLowerCase() === '.yml';
+    }
+
+    function generateApi(api, swagger, dest, fname) {
         var CodeGen = require('swagger-js-codegen').CodeGen;
-        var swagger = JSON.parse(data),
-          source = null;
+        var source = null;
 
         if (api.type === 'angular' || api.angularjs === true) {
             source = CodeGen.getAngularCode({ moduleName: api.moduleName, className: api.className, swagger: swagger });
